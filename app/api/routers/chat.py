@@ -13,9 +13,9 @@ router = APIRouter(prefix="/chat", tags=["chat"])
 @router.post("", response_model=MessageRead)
 async def create_message(payload: MessageCreate) -> MessageRead:
     llm_client = LLMClient("http://localhost:11434/v1/chat/completions", "qwen2.5:3b")
-    role = "assistant"
     messages = [
-        {"role": role, "content": payload.content}
+        {"role": "assistant", "content": "Ты мой крутой помощник!"},
+        {"role": "user", "content": payload.content},
     ]
     response = await llm_client.complete(messages, 0.7, 100)
     logger.info(response)
