@@ -1,6 +1,4 @@
 """Чат-роутер. На этапе 1 свяжет MessageCreate -> LLMClient -> MessageRead.
-
-Сейчас — минимальная заглушка, чтобы структура была цельной и запускалась.
 """
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
@@ -35,4 +33,3 @@ async def stream_message(payload: MessageCreate,
     ]
     generator = llm_client.stream_chat(messages, settings.llm_temperature, settings.llm_max_tokens)
     return StreamingResponse(generator, media_type="text/plain")
-
