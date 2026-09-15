@@ -11,13 +11,17 @@ from fastapi import FastAPI
 
 from app.api.routers import chat, health
 from app.core.config import settings
+from app.services.llm_client import LLMClient
+from app.core.config import settings
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Startup: сюда позже — прогрев модели эмбеддингов, коннекты и т.п.
+    app.state.llm_client = LLMClient(settings.llm_base_url, settings.llm_model)
     yield
     # Shutdown: закрытие ресурсов.
+    await app.state.llm_client.aclose()
 
 
 app = FastAPI(title=settings.app_name, lifespan=lifespan)

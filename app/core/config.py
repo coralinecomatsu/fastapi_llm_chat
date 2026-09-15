@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # LLM
     llm_base_url: str = "http://localhost:8001"  # мок из [L] секции 1
-    llm_model: str = "qwen2.5:7b"
+    llm_model: str = "qwen2.5:3b"
     llm_connect_timeout: float = 5.0
     llm_read_timeout: float = 30.0
 

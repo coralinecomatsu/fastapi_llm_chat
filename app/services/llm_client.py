@@ -61,6 +61,8 @@ class LLMClient:
             finish_reason=choice["finish_reason"],
         )
 
+    async def aclose(self):
+        await self._client.aclose()
 
 class LLMClientExample:
     def __init__(self, base_url: str, model: str) -> None:
