@@ -16,8 +16,10 @@ class Settings(BaseSettings):
     app_name: str = "RAG Chat"
 
     # LLM
-    llm_base_url: str = "http://localhost:8001"  # мок из [L] секции 1
+    llm_base_url: str = "http://localhost:11434/v1/chat/completions"
     llm_model: str = "qwen2.5:3b"
+    llm_temperature: float = 0.5
+    llm_max_tokens: int = 1024
     llm_connect_timeout: float = 5.0
     llm_read_timeout: float = 30.0
 

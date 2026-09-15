@@ -61,6 +61,31 @@ class LLMClient:
             finish_reason=choice["finish_reason"],
         )
 
+    async def stream_chat(self, messages, temperature, max_tokens):
+        body = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "stream": True,
+        }
+        async with self._client.stream("POST", self.base_url, json=body) as response:
+            response.raise_for_status()
+            async for line in response.aiter_lines():
+                if not line:
+                    continue
+
+                if line.startswith("data:"):
+                    payload = line[len("data:"):].strip()
+                    if payload == "[DONE]":
+                        return
+
+                    json_data = json.loads(payload)
+                    delta = json_data["choices"][0].get("delta", {})
+                    content = delta.get("content")
+                    if content:
+                        yield content
+
     async def aclose(self):
         await self._client.aclose()
 
