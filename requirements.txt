@@ -5,7 +5,10 @@ pydantic-settings
 sqlalchemy[asyncio]
 aiosqlite
 httpx
+tiktoken
+sentence-transformers
+numpy
 # dev
 pytest
 mypy
-tiktoken
+rank-bm25
