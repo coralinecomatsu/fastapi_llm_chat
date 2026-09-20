@@ -1,19 +1,13 @@
-"""Клиент к OpenAI-совместимому LLM API.
-
-ЗАГЛУШКА под [L] задание 1.1. Твоя работа на этапе 1 — заменить тело
-complete на реальный httpx.AsyncClient-запрос, распарсить choices/usage,
-обработать finish_reason == "length" и завернуть ошибки в LLMError.
-"""
+"""Клиент к OpenAI-совместимому LLM API."""
 import json
 import logging
 from dataclasses import dataclass
 
 import httpx
+
+from app.core.exceptions import LLMError
+
 logger = logging.getLogger(__name__)
-
-
-class LLMError(Exception):
-    """Понятное исключение для сбоев LLM-слоя."""
 
 
 @dataclass
