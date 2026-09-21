@@ -10,7 +10,6 @@ from app.services.llm_client import LLMResponse
 
 class FakeLLM:
     async def complete(self, messages, temperature, max_tokens):
-        # вернуть объект с .content — можно взять твой же LLMResponse
         return LLMResponse(content="фейковый ответ",
                            prompt_tokens=0, completion_tokens=0, finish_reason="stop")
 
