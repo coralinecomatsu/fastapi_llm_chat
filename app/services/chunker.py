@@ -10,7 +10,7 @@
 - ``chunk_by_paragraphs`` — по абзацам, с дорезкой слишком больших.
 """
 import tiktoken
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -22,11 +22,13 @@ class Chunk:
         index: порядковый номер чанка в выдаче (0, 1, 2, ...).
         start_token: позиция первого токена чанка в потоке токенов документа.
         end_token: позиция за последним токеном (start_token + длина в токенах).
+        metadata: метаданные
     """
     text: str
     index: int
     start_token: int
     end_token: int
+    metadata: dict = field(default_factory=dict)  # {"source": ..., "page": ...}
 
 
 class Chunker:

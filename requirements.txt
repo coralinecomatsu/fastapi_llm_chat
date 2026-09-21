@@ -8,7 +8,9 @@ httpx
 tiktoken
 sentence-transformers
 numpy
+rank-bm25
+pypdf
 # dev
 pytest
 mypy
-rank-bm25
+reportlab
